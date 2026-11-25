@@ -1,0 +1,50 @@
+{
+  "schema": "edit/1.1",
+  "hook": { "text": "20", "color": "warn", "hit_word": 7 },
+  "blocks": [
+    { "id": "b01", "top": null,       "hero": [0, 3],    "bottom": [3, 5],     "style": "script", "color": null,   "accent": null, "display": {}, "reveal": false },
+    { "id": "b02", "top": [5, 7],     "hero": [7, 9],    "bottom": null,       "style": "stomp",  "color": "warn", "accent": null, "display": {}, "reveal": false },
+    { "id": "b03", "top": [9, 10],    "hero": [10, 14],  "bottom": [14, 18],   "style": "script", "color": null,   "accent": 3,    "display": {}, "reveal": false },
+    { "id": "b04", "top": null,       "hero": [18, 21],  "bottom": [21, 28],   "style": "script", "color": null,   "accent": 2,    "display": {}, "reveal": false },
+    { "id": "b05", "top": [49, 52],   "hero": [52, 55],  "bottom": null,       "style": "stomp",  "color": "warn", "accent": null, "display": {}, "reveal": false },
+    { "id": "b06", "top": [55, 60],   "hero": [60, 64],  "bottom": null,       "style": "script", "color": null,   "accent": null, "display": {}, "reveal": false },
+    { "id": "b07", "top": [64, 66],   "hero": [66, 69],  "bottom": [69, 72],   "style": "script", "color": null,   "accent": null, "display": {}, "reveal": false },
+    { "id": "b08", "top": [72, 76],   "hero": [76, 78],  "bottom": [78, 80],   "style": "script", "color": null,   "accent": null, "display": {}, "reveal": false },
+    { "id": "b09", "top": [80, 84],   "hero": [84, 88],  "bottom": null,       "style": "script", "color": null,   "accent": null, "display": {}, "reveal": false },
+    { "id": "b10", "top": [88, 90],   "hero": [90, 93],  "bottom": [93, 95],   "style": "stomp",  "color": "gold", "accent": null, "display": {}, "reveal": false },
+    { "id": "b11", "top": [95, 98],   "hero": [98, 102], "bottom": null,       "style": "script", "color": null,   "accent": 0,    "display": {}, "reveal": false },
+    { "id": "b12", "top": [102, 108], "hero": [108, 113],"bottom": null,       "style": "script", "color": null,   "accent": null, "display": {}, "reveal": false },
+    { "id": "b13", "top": [113, 118], "hero": [118, 123],"bottom": [123, 127], "style": "script", "color": null,   "accent": null, "display": {}, "reveal": false },
+    { "id": "b14", "top": [127, 129], "hero": [129, 133],"bottom": null,       "style": "script", "color": null,   "accent": null, "display": {}, "reveal": false },
+    { "id": "b15", "top": [133, 136], "hero": [136, 140],"bottom": [140, 147], "style": "script", "color": null,   "accent": null, "display": {}, "reveal": false },
+    { "id": "b16", "top": null,       "hero": [147, 150],"bottom": [150, 153], "style": "script", "color": null,   "accent": null, "display": {}, "reveal": false },
+    { "id": "b17", "top": null,       "hero": [153, 156],"bottom": [156, 162], "style": "script", "color": null,   "accent": null, "display": {}, "reveal": false }
+  ],
+  "steps": {
+    "title": "5 TÀI SẢN TỪ 1 ẢNH",
+    "items": [
+      { "range": [28, 32], "label": "Hero cho website" },
+      { "range": [32, 36], "label": "Lifestyle Facebook" },
+      { "range": [36, 40], "label": "Cận chất liệu" },
+      { "range": [40, 44], "label": "Video dọc Reels" },
+      { "range": [44, 49], "label": "Banner quảng cáo" }
+    ]
+  },
+  "shots": [
+    { "cut_at_word": 0,   "s0": 1.02, "s1": 1.06, "x": 0.0, "y": 0.0 },
+    { "cut_at_word": 7,   "s0": 1.16, "s1": 1.20, "x": 0.0, "y": 0.0 },
+    { "cut_at_word": 14,  "s0": 1.00, "s1": 1.04, "x": 0.0, "y": 0.0 },
+    { "cut_at_word": 21,  "s0": 1.18, "s1": 1.22, "x": 0.0, "y": -0.06 },
+    { "cut_at_word": 36,  "s0": 1.04, "s1": 1.08, "x": 0.0, "y": -0.06 },
+    { "cut_at_word": 49,  "s0": 1.16, "s1": 1.20, "x": 0.0, "y": 0.0 },
+    { "cut_at_word": 64,  "s0": 1.02, "s1": 1.06, "x": 0.0, "y": 0.0 },
+    { "cut_at_word": 76,  "s0": 1.14, "s1": 1.18, "x": 0.0, "y": 0.0 },
+    { "cut_at_word": 88,  "s0": 1.00, "s1": 1.04, "x": 0.0, "y": 0.0 },
+    { "cut_at_word": 98,  "s0": 1.16, "s1": 1.20, "x": 0.0, "y": 0.0 },
+    { "cut_at_word": 113, "s0": 1.02, "s1": 1.06, "x": 0.0, "y": 0.0 },
+    { "cut_at_word": 127, "s0": 1.14, "s1": 1.18, "x": 0.0, "y": 0.0 },
+    { "cut_at_word": 133, "s0": 1.00, "s1": 1.04, "x": 0.0, "y": 0.0 },
+    { "cut_at_word": 147, "s0": 1.06, "s1": 1.20, "x": 0.0, "y": 0.0 }
+  ],
+  "cta": { "range": [147, 162], "label": "Bình luận", "keyword": "5 TÀI SẢN" }
+}

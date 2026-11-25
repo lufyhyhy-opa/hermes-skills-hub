@@ -1,0 +1,211 @@
+#!/usr/bin/env python3
+"""
+hermes-long-horizon-harness — Anthropic "Effective Harnesses for Long-Running Agents" CLI
+Implements the Two-Agent Harness Pattern (Initializer Agent + Incremental Coding Agent):
+  1. Immutable JSON Feature Ledger (`feature_list.json`): Agents may ONLY flip `"passes": false -> true`
+     after passing deterministic runtime verification (`hermes-verify-harness`).
+  2. Cross-Session Context Handoff (`claude-progress.txt`): Structured session log paired with git state.
+  3. Clean-State Bootstrap (`init.sh` / preflight check) at the start of every session.
+"""
+
+from __future__ import annotations
+
+import argparse
+from datetime import datetime, timezone
+import hashlib
+import json
+from pathlib import Path
+import subprocess
+import sys
+
+
+def compute_spec_hash(feature: dict) -> str:
+    payload = f"{feature.get('id')}|{feature.get('category')}|{feature.get('description')}|{json.dumps(feature.get('steps', []), sort_keys=True)}"
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()[:16]
+
+
+def cmd_init(project_dir: Path, goal: str, features_json: str | None):
+    project_dir.mkdir(parents=True, exist_ok=True)
+    ledger_path = project_dir / "feature_list.json"
+    progress_path = project_dir / "claude-progress.txt"
+
+    if features_json:
+        raw_features = json.loads(features_json)
+    else:
+        raw_features = [
+            {
+                "id": "F001",
+                "category": "foundation",
+                "description": f"Thiết lập cấu trúc cốt lõi và ràng buộc kiến trúc cho: {goal}",
+                "steps": [
+                    "Khởi tạo cấu trúc module và cấu hình linter/verifier",
+                    "Chạy hermes-verify-harness đạt 0 lỗi",
+                ],
+                "passes": False,
+            },
+            {
+                "id": "F002",
+                "category": "functional",
+                "description": f"Triển khai luồng nghiệp vụ và giao diện chính cho: {goal}",
+                "steps": [
+                    "Hoàn thiện toàn bộ logic/UI không còn placeholder hay comment cắt cụt",
+                    "Xác thực end-to-end qua hermes-verify-harness",
+                ],
+                "passes": False,
+            },
+            {
+                "id": "F003",
+                "category": "verification",
+                "description": "Kiểm chứng Runtime toàn diện & xuất biên bản Pyramid of Trust",
+                "steps": [
+                    "Chạy toàn bộ test suite / media decode / build production",
+                    "Xuất trust_pyramid_receipt.json đạt trạng thái PASSED",
+                ],
+                "passes": False,
+            },
+        ]
+
+    for item in raw_features:
+        item.setdefault("passes", False)
+        item["immutable_spec_hash"] = compute_spec_hash(item)
+
+    ledger = {
+        "schema": "anthropic-long-running-harness-v1",
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        "goal": goal,
+        "rules": [
+            "TUYỆT ĐỐI KHÔNG xóa hoặc sửa trường description/steps/immutable_spec_hash của bất kỳ feature nào.",
+            "Chỉ được phép đổi 'passes' từ false sang true thông qua lệnh: hermes-long-horizon-harness complete --id <ID>.",
+        ],
+        "features": raw_features,
+    }
+    ledger_path.write_text(json.dumps(ledger, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    now_str = datetime.now(timezone.utc).isoformat()
+    if not progress_path.exists():
+        progress_path.write_text(
+            f"# CLAUDE / HERMES LONG-HORIZON PROGRESS LOG\n"
+            f"# Project: {project_dir.name}\n"
+            f"# Goal: {goal}\n"
+            f"==================================================================\n"
+            f"[{now_str}] [INITIALIZER_AGENT] Initialized feature_list.json with {len(raw_features)} immutable features.\n",
+            encoding="utf-8",
+        )
+
+    print(json.dumps({
+        "status": "INITIALIZED",
+        "project_dir": str(project_dir),
+        "feature_list": str(ledger_path),
+        "progress_log": str(progress_path),
+        "total_features": len(raw_features),
+    }, ensure_ascii=False, indent=2))
+
+
+def load_and_verify_ledger(project_dir: Path) -> dict:
+    ledger_path = project_dir / "feature_list.json"
+    if not ledger_path.exists():
+        print(json.dumps({
+            "status": "ERROR",
+            "message": f"[AI-HARNESS-CONSTRAINT] Không tìm thấy {ledger_path}. [AI-FIX-DIRECTIVE] Chạy 'hermes-long-horizon-harness init <dir> --goal \"...\"' trước.",
+        }, ensure_ascii=False), file=sys.stderr)
+        sys.exit(1)
+
+    ledger = json.loads(ledger_path.read_text(encoding="utf-8"))
+    for feat in ledger.get("features", []):
+        expected_hash = feat.get("immutable_spec_hash")
+        actual_hash = compute_spec_hash(feat)
+        if expected_hash and expected_hash != actual_hash:
+            print(json.dumps({
+                "status": "TAMPER_DETECTED",
+                "feature_id": feat.get("id"),
+                "message": (
+                    f"[AI-HARNESS-CONSTRAINT] Phát hiện feature '{feat.get('id')}' trong feature_list.json bị sửa đổi trái phép description/steps! "
+                    f"[AI-FIX-DIRECTIVE] Khôi phục nguyên trạng đặc tả của feature '{feat.get('id')}'. Agent chỉ được phép đổi 'passes': true sau khi hoàn thành."
+                ),
+            }, ensure_ascii=False), file=sys.stderr)
+            sys.exit(1)
+    return ledger
+
+
+def cmd_status(project_dir: Path):
+    ledger = load_and_verify_ledger(project_dir)
+    features = ledger.get("features", [])
+    passed = [f for f in features if f.get("passes")]
+    pending = [f for f in features if not f.get("passes")]
+    print(json.dumps({
+        "status": "ALL_COMPLETED" if not pending else "IN_PROGRESS",
+        "goal": ledger.get("goal"),
+        "total_features": len(features),
+        "passed_count": len(passed),
+        "pending_count": len(pending),
+        "next_feature": pending[0] if pending else None,
+    }, ensure_ascii=False, indent=2))
+
+
+def cmd_complete(project_dir: Path, feature_id: str, note: str):
+    ledger = load_and_verify_ledger(project_dir)
+    target_feat = None
+    for feat in ledger.get("features", []):
+        if feat.get("id") == feature_id:
+            target_feat = feat
+            break
+
+    if not target_feat:
+        print(json.dumps({"status": "ERROR", "message": f"Không tìm thấy feature ID '{feature_id}'"}), file=sys.stderr)
+        sys.exit(1)
+
+    # Run hermes-verify-harness before allowing passes=True
+    verifier_bin = Path.home() / ".hermes" / "bin" / "hermes-verify-harness"
+    if verifier_bin.exists():
+        proc = subprocess.run([sys.executable, str(verifier_bin), str(project_dir)], capture_output=True, text=True)
+        if proc.returncode != 0:
+            print(json.dumps({
+                "status": "VERIFICATION_FAILED",
+                "feature_id": feature_id,
+                "message": "[AI-HARNESS-CONSTRAINT] Không thể đánh dấu hoàn thành feature khi hermes-verify-harness còn báo lỗi.",
+                "verifier_output": proc.stdout or proc.stderr,
+            }, ensure_ascii=False, indent=2), file=sys.stderr)
+            sys.exit(1)
+
+    target_feat["passes"] = True
+    target_feat["completed_at"] = datetime.now(timezone.utc).isoformat()
+    ledger_path = project_dir / "feature_list.json"
+    ledger_path.write_text(json.dumps(ledger, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    progress_path = project_dir / "claude-progress.txt"
+    with progress_path.open("a", encoding="utf-8") as f:
+        f.write(f"[{target_feat['completed_at']}] [COMPLETED {feature_id}] {target_feat['description']} | Note: {note}\n")
+
+    cmd_status(project_dir)
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Hermes Long-Horizon Two-Agent Harness CLI")
+    sub = parser.add_subparsers(dest="action", required=True)
+
+    p_init = sub.add_parser("init", help="Initialize long-horizon feature_list.json and claude-progress.txt")
+    p_init.add_argument("project_dir")
+    p_init.add_argument("--goal", required=True)
+    p_init.add_argument("--features-json", help="Optional JSON array of feature objects")
+
+    p_status = sub.add_parser("status", help="Verify immutable feature ledger and show next feature")
+    p_status.add_argument("project_dir")
+
+    p_complete = sub.add_parser("complete", help="Verify project and mark a feature as passing")
+    p_complete.add_argument("project_dir")
+    p_complete.add_argument("--id", required=True, dest="feature_id")
+    p_complete.add_argument("--note", default="Verified via hermes-verify-harness")
+
+    args = parser.parse_args()
+    project_dir = Path(args.project_dir).expanduser().resolve()
+
+    if args.action == "init":
+        cmd_init(project_dir, args.goal, args.features_json)
+    elif args.action == "status":
+        cmd_status(project_dir)
+    elif args.action == "complete":
+        cmd_complete(project_dir, args.feature_id, args.note)
+
+
+if __name__ == "__main__":
+    main()

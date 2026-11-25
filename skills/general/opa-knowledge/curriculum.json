@@ -1,0 +1,626 @@
+{
+  "version": "opa-1.0.0",
+  "target_count": 20,
+  "profiles": [
+    {
+      "profile": "default",
+      "department": "Tổng Hành Dinh — Văn Phòng Tổng Giám Đốc",
+      "version": "opa-1.0.0",
+      "learn": [
+        "Định vị và tên thương hiệu",
+        "Nguồn/qualifiers/mâu thuẫn 12.1–12.2",
+        "Bốn sản phẩm, dự án và giới hạn",
+        "Riêng tư, consent và luật sư",
+        "Gate1/2/3 và phạm vi vai trò",
+        "Điều phối"
+      ],
+      "reading": [
+        "references/knowledge.md",
+        "references/claims.json",
+        "references/sources/Bang-kiem-thong-tin.md",
+        "references/sources/San-pham-va-ky-thuat.md",
+        "references/sources/Ke-hoach-ho-so-nang-luc-OPA.md",
+        "references/sources/Du-an-va-khach.md",
+        "references/sources/Doi-ngu.md"
+      ],
+      "exercise": "exercises/default.md",
+      "reviewer": "Ngọc Ánh + Minh",
+      "reviewer_assignment_status": "PROPOSED_NOT_ACCEPTED",
+      "independent_evaluator": "Người duyệt được chỉ định, khác learner; evaluator chưa thực chạy",
+      "rubric": "rubric.json",
+      "result": "NOT_TESTED",
+      "evidence": [],
+      "run_later": "hermes chat -q '<dán nội dung exercise, giữ dữ liệu local và tắt network/write tools theo runner đã duyệt>'",
+      "run_later_note": "Không chạy trong task này; kiểm hermes chat --help của máy trước khi cấu hình toolsets. Default cần unset HERMES_HOME/HERMES_PROFILE hoặc mở shell default, không chạy từ alias agent00."
+    },
+    {
+      "profile": "agent-00-orchestrator",
+      "department": "Điều phối",
+      "version": "opa-1.0.0",
+      "learn": [
+        "Định vị và tên thương hiệu",
+        "Nguồn/qualifiers/mâu thuẫn 12.1–12.2",
+        "Bốn sản phẩm, dự án và giới hạn",
+        "Riêng tư, consent và luật sư",
+        "Gate1/2/3 và phạm vi vai trò",
+        "Điều phối"
+      ],
+      "reading": [
+        "references/knowledge.md",
+        "references/claims.json",
+        "references/sources/Bang-kiem-thong-tin.md",
+        "references/sources/San-pham-va-ky-thuat.md",
+        "references/sources/Ke-hoach-ho-so-nang-luc-OPA.md",
+        "references/sources/Du-an-va-khach.md",
+        "references/sources/Doi-ngu.md"
+      ],
+      "exercise": "exercises/agent-00-orchestrator.md",
+      "reviewer": "Ngọc Ánh + Minh",
+      "reviewer_assignment_status": "PROPOSED_NOT_ACCEPTED",
+      "independent_evaluator": "Người duyệt được chỉ định, khác learner; evaluator chưa thực chạy",
+      "rubric": "rubric.json",
+      "result": "NOT_TESTED",
+      "evidence": [],
+      "run_later": "hermes -p agent-00-orchestrator chat -q '<dán nội dung exercise, giữ dữ liệu local và tắt network/write tools theo runner đã duyệt>'",
+      "run_later_note": "Không chạy trong task này; kiểm hermes chat --help của máy trước khi cấu hình toolsets. Default cần unset HERMES_HOME/HERMES_PROFILE hoặc mở shell default, không chạy từ alias agent00."
+    },
+    {
+      "profile": "agent-01-research",
+      "department": "Nghiên cứu thị trường",
+      "version": "opa-1.0.0",
+      "learn": [
+        "Định vị và tên thương hiệu",
+        "Nguồn/qualifiers/mâu thuẫn 12.1–12.2",
+        "Bốn sản phẩm, dự án và giới hạn",
+        "Riêng tư, consent và luật sư",
+        "Gate1/2/3 và phạm vi vai trò",
+        "Nghiên cứu thị trường"
+      ],
+      "reading": [
+        "references/knowledge.md",
+        "references/claims.json",
+        "references/sources/Bang-kiem-thong-tin.md",
+        "references/sources/San-pham-va-ky-thuat.md",
+        "references/sources/Ke-hoach-ho-so-nang-luc-OPA.md",
+        "references/sources/Du-an-va-khach.md",
+        "references/sources/Doi-ngu.md"
+      ],
+      "exercise": "exercises/agent-01-research.md",
+      "reviewer": "Ngọc Ánh",
+      "reviewer_assignment_status": "PROPOSED_NOT_ACCEPTED",
+      "independent_evaluator": "Người duyệt được chỉ định, khác learner; evaluator chưa thực chạy",
+      "rubric": "rubric.json",
+      "result": "NOT_TESTED",
+      "evidence": [],
+      "run_later": "hermes -p agent-01-research chat -q '<dán nội dung exercise, giữ dữ liệu local và tắt network/write tools theo runner đã duyệt>'",
+      "run_later_note": "Không chạy trong task này; kiểm hermes chat --help của máy trước khi cấu hình toolsets. Default cần unset HERMES_HOME/HERMES_PROFILE hoặc mở shell default, không chạy từ alias agent00."
+    },
+    {
+      "profile": "agent-02-plan",
+      "department": "Chiến lược và kế hoạch",
+      "version": "opa-1.0.0",
+      "learn": [
+        "Định vị và tên thương hiệu",
+        "Nguồn/qualifiers/mâu thuẫn 12.1–12.2",
+        "Bốn sản phẩm, dự án và giới hạn",
+        "Riêng tư, consent và luật sư",
+        "Gate1/2/3 và phạm vi vai trò",
+        "Chiến lược và kế hoạch"
+      ],
+      "reading": [
+        "references/knowledge.md",
+        "references/claims.json",
+        "references/sources/Bang-kiem-thong-tin.md",
+        "references/sources/San-pham-va-ky-thuat.md",
+        "references/sources/Ke-hoach-ho-so-nang-luc-OPA.md",
+        "references/sources/Du-an-va-khach.md",
+        "references/sources/Doi-ngu.md"
+      ],
+      "exercise": "exercises/agent-02-plan.md",
+      "reviewer": "Anh Huy + Minh",
+      "reviewer_assignment_status": "PROPOSED_NOT_ACCEPTED",
+      "independent_evaluator": "Người duyệt được chỉ định, khác learner; evaluator chưa thực chạy",
+      "rubric": "rubric.json",
+      "result": "NOT_TESTED",
+      "evidence": [],
+      "run_later": "hermes -p agent-02-plan chat -q '<dán nội dung exercise, giữ dữ liệu local và tắt network/write tools theo runner đã duyệt>'",
+      "run_later_note": "Không chạy trong task này; kiểm hermes chat --help của máy trước khi cấu hình toolsets. Default cần unset HERMES_HOME/HERMES_PROFILE hoặc mở shell default, không chạy từ alias agent00."
+    },
+    {
+      "profile": "agent-03-outline",
+      "department": "Cấu trúc và dàn ý",
+      "version": "opa-1.0.0",
+      "learn": [
+        "Định vị và tên thương hiệu",
+        "Nguồn/qualifiers/mâu thuẫn 12.1–12.2",
+        "Bốn sản phẩm, dự án và giới hạn",
+        "Riêng tư, consent và luật sư",
+        "Gate1/2/3 và phạm vi vai trò",
+        "Cấu trúc và dàn ý"
+      ],
+      "reading": [
+        "references/knowledge.md",
+        "references/claims.json",
+        "references/sources/Bang-kiem-thong-tin.md",
+        "references/sources/San-pham-va-ky-thuat.md",
+        "references/sources/Ke-hoach-ho-so-nang-luc-OPA.md",
+        "references/sources/Du-an-va-khach.md",
+        "references/sources/Doi-ngu.md"
+      ],
+      "exercise": "exercises/agent-03-outline.md",
+      "reviewer": "Ngọc Ánh",
+      "reviewer_assignment_status": "PROPOSED_NOT_ACCEPTED",
+      "independent_evaluator": "Người duyệt được chỉ định, khác learner; evaluator chưa thực chạy",
+      "rubric": "rubric.json",
+      "result": "NOT_TESTED",
+      "evidence": [],
+      "run_later": "hermes -p agent-03-outline chat -q '<dán nội dung exercise, giữ dữ liệu local và tắt network/write tools theo runner đã duyệt>'",
+      "run_later_note": "Không chạy trong task này; kiểm hermes chat --help của máy trước khi cấu hình toolsets. Default cần unset HERMES_HOME/HERMES_PROFILE hoặc mở shell default, không chạy từ alias agent00."
+    },
+    {
+      "profile": "agent-04-copywriter",
+      "department": "Biên soạn",
+      "version": "opa-1.0.0",
+      "learn": [
+        "Định vị và tên thương hiệu",
+        "Nguồn/qualifiers/mâu thuẫn 12.1–12.2",
+        "Bốn sản phẩm, dự án và giới hạn",
+        "Riêng tư, consent và luật sư",
+        "Gate1/2/3 và phạm vi vai trò",
+        "Biên soạn"
+      ],
+      "reading": [
+        "references/knowledge.md",
+        "references/claims.json",
+        "references/sources/Bang-kiem-thong-tin.md",
+        "references/sources/San-pham-va-ky-thuat.md",
+        "references/sources/Ke-hoach-ho-so-nang-luc-OPA.md",
+        "references/sources/Du-an-va-khach.md",
+        "references/sources/Doi-ngu.md"
+      ],
+      "exercise": "exercises/agent-04-copywriter.md",
+      "reviewer": "Anh Huy",
+      "reviewer_assignment_status": "PROPOSED_NOT_ACCEPTED",
+      "independent_evaluator": "Người duyệt được chỉ định, khác learner; evaluator chưa thực chạy",
+      "rubric": "rubric.json",
+      "result": "NOT_TESTED",
+      "evidence": [],
+      "run_later": "hermes -p agent-04-copywriter chat -q '<dán nội dung exercise, giữ dữ liệu local và tắt network/write tools theo runner đã duyệt>'",
+      "run_later_note": "Không chạy trong task này; kiểm hermes chat --help của máy trước khi cấu hình toolsets. Default cần unset HERMES_HOME/HERMES_PROFILE hoặc mở shell default, không chạy từ alias agent00."
+    },
+    {
+      "profile": "agent-05-quality-gate",
+      "department": "Kiểm định nội dung",
+      "version": "opa-1.0.0",
+      "learn": [
+        "Định vị và tên thương hiệu",
+        "Nguồn/qualifiers/mâu thuẫn 12.1–12.2",
+        "Bốn sản phẩm, dự án và giới hạn",
+        "Riêng tư, consent và luật sư",
+        "Gate1/2/3 và phạm vi vai trò",
+        "Kiểm định nội dung"
+      ],
+      "reading": [
+        "references/knowledge.md",
+        "references/claims.json",
+        "references/sources/Bang-kiem-thong-tin.md",
+        "references/sources/San-pham-va-ky-thuat.md",
+        "references/sources/Ke-hoach-ho-so-nang-luc-OPA.md",
+        "references/sources/Du-an-va-khach.md",
+        "references/sources/Doi-ngu.md"
+      ],
+      "exercise": "exercises/agent-05-quality-gate.md",
+      "reviewer": "Ngọc Ánh",
+      "reviewer_assignment_status": "PROPOSED_NOT_ACCEPTED",
+      "independent_evaluator": "Người duyệt được chỉ định, khác learner; evaluator chưa thực chạy",
+      "rubric": "rubric.json",
+      "result": "NOT_TESTED",
+      "evidence": [],
+      "run_later": "hermes -p agent-05-quality-gate chat -q '<dán nội dung exercise, giữ dữ liệu local và tắt network/write tools theo runner đã duyệt>'",
+      "run_later_note": "Không chạy trong task này; kiểm hermes chat --help của máy trước khi cấu hình toolsets. Default cần unset HERMES_HOME/HERMES_PROFILE hoặc mở shell default, không chạy từ alias agent00."
+    },
+    {
+      "profile": "agent-06-fact-check",
+      "department": "Kiểm chứng",
+      "version": "opa-1.0.0",
+      "learn": [
+        "Định vị và tên thương hiệu",
+        "Nguồn/qualifiers/mâu thuẫn 12.1–12.2",
+        "Bốn sản phẩm, dự án và giới hạn",
+        "Riêng tư, consent và luật sư",
+        "Gate1/2/3 và phạm vi vai trò",
+        "Kiểm chứng"
+      ],
+      "reading": [
+        "references/knowledge.md",
+        "references/claims.json",
+        "references/sources/Bang-kiem-thong-tin.md",
+        "references/sources/San-pham-va-ky-thuat.md",
+        "references/sources/Ke-hoach-ho-so-nang-luc-OPA.md",
+        "references/sources/Du-an-va-khach.md",
+        "references/sources/Doi-ngu.md"
+      ],
+      "exercise": "exercises/agent-06-fact-check.md",
+      "reviewer": "Ngọc Ánh",
+      "reviewer_assignment_status": "PROPOSED_NOT_ACCEPTED",
+      "independent_evaluator": "Người duyệt được chỉ định, khác learner; evaluator chưa thực chạy",
+      "rubric": "rubric.json",
+      "result": "NOT_TESTED",
+      "evidence": [],
+      "run_later": "hermes -p agent-06-fact-check chat -q '<dán nội dung exercise, giữ dữ liệu local và tắt network/write tools theo runner đã duyệt>'",
+      "run_later_note": "Không chạy trong task này; kiểm hermes chat --help của máy trước khi cấu hình toolsets. Default cần unset HERMES_HOME/HERMES_PROFILE hoặc mở shell default, không chạy từ alias agent00."
+    },
+    {
+      "profile": "agent-07-repurpose",
+      "department": "Chuyển thể",
+      "version": "opa-1.0.0",
+      "learn": [
+        "Định vị và tên thương hiệu",
+        "Nguồn/qualifiers/mâu thuẫn 12.1–12.2",
+        "Bốn sản phẩm, dự án và giới hạn",
+        "Riêng tư, consent và luật sư",
+        "Gate1/2/3 và phạm vi vai trò",
+        "Chuyển thể"
+      ],
+      "reading": [
+        "references/knowledge.md",
+        "references/claims.json",
+        "references/sources/Bang-kiem-thong-tin.md",
+        "references/sources/San-pham-va-ky-thuat.md",
+        "references/sources/Ke-hoach-ho-so-nang-luc-OPA.md",
+        "references/sources/Du-an-va-khach.md",
+        "references/sources/Doi-ngu.md"
+      ],
+      "exercise": "exercises/agent-07-repurpose.md",
+      "reviewer": "Ngọc Ánh",
+      "reviewer_assignment_status": "PROPOSED_NOT_ACCEPTED",
+      "independent_evaluator": "Người duyệt được chỉ định, khác learner; evaluator chưa thực chạy",
+      "rubric": "rubric.json",
+      "result": "NOT_TESTED",
+      "evidence": [],
+      "run_later": "hermes -p agent-07-repurpose chat -q '<dán nội dung exercise, giữ dữ liệu local và tắt network/write tools theo runner đã duyệt>'",
+      "run_later_note": "Không chạy trong task này; kiểm hermes chat --help của máy trước khi cấu hình toolsets. Default cần unset HERMES_HOME/HERMES_PROFILE hoặc mở shell default, không chạy từ alias agent00."
+    },
+    {
+      "profile": "agent-08-carousel",
+      "department": "Thiết kế carousel",
+      "version": "opa-1.0.0",
+      "learn": [
+        "Định vị và tên thương hiệu",
+        "Nguồn/qualifiers/mâu thuẫn 12.1–12.2",
+        "Bốn sản phẩm, dự án và giới hạn",
+        "Riêng tư, consent và luật sư",
+        "Gate1/2/3 và phạm vi vai trò",
+        "Thiết kế carousel"
+      ],
+      "reading": [
+        "references/knowledge.md",
+        "references/claims.json",
+        "references/sources/Bang-kiem-thong-tin.md",
+        "references/sources/San-pham-va-ky-thuat.md",
+        "references/sources/Ke-hoach-ho-so-nang-luc-OPA.md",
+        "references/sources/Du-an-va-khach.md",
+        "references/sources/Doi-ngu.md"
+      ],
+      "exercise": "exercises/agent-08-carousel.md",
+      "reviewer": "Thành",
+      "reviewer_assignment_status": "PROPOSED_NOT_ACCEPTED",
+      "independent_evaluator": "Người duyệt được chỉ định, khác learner; evaluator chưa thực chạy",
+      "rubric": "rubric.json",
+      "result": "NOT_TESTED",
+      "evidence": [],
+      "run_later": "hermes -p agent-08-carousel chat -q '<dán nội dung exercise, giữ dữ liệu local và tắt network/write tools theo runner đã duyệt>'",
+      "run_later_note": "Không chạy trong task này; kiểm hermes chat --help của máy trước khi cấu hình toolsets. Default cần unset HERMES_HOME/HERMES_PROFILE hoặc mở shell default, không chạy từ alias agent00."
+    },
+    {
+      "profile": "agent-09-scriptwriter",
+      "department": "Biên kịch video",
+      "version": "opa-1.0.0",
+      "learn": [
+        "Định vị và tên thương hiệu",
+        "Nguồn/qualifiers/mâu thuẫn 12.1–12.2",
+        "Bốn sản phẩm, dự án và giới hạn",
+        "Riêng tư, consent và luật sư",
+        "Gate1/2/3 và phạm vi vai trò",
+        "Biên kịch video"
+      ],
+      "reading": [
+        "references/knowledge.md",
+        "references/claims.json",
+        "references/sources/Bang-kiem-thong-tin.md",
+        "references/sources/San-pham-va-ky-thuat.md",
+        "references/sources/Ke-hoach-ho-so-nang-luc-OPA.md",
+        "references/sources/Du-an-va-khach.md",
+        "references/sources/Doi-ngu.md"
+      ],
+      "exercise": "exercises/agent-09-scriptwriter.md",
+      "reviewer": "Thành + Cường",
+      "reviewer_assignment_status": "PROPOSED_NOT_ACCEPTED",
+      "independent_evaluator": "Người duyệt được chỉ định, khác learner; evaluator chưa thực chạy",
+      "rubric": "rubric.json",
+      "result": "NOT_TESTED",
+      "evidence": [],
+      "run_later": "hermes -p agent-09-scriptwriter chat -q '<dán nội dung exercise, giữ dữ liệu local và tắt network/write tools theo runner đã duyệt>'",
+      "run_later_note": "Không chạy trong task này; kiểm hermes chat --help của máy trước khi cấu hình toolsets. Default cần unset HERMES_HOME/HERMES_PROFILE hoặc mở shell default, không chạy từ alias agent00."
+    },
+    {
+      "profile": "agent-10-video-editor",
+      "department": "Hậu kỳ",
+      "version": "opa-1.0.0",
+      "learn": [
+        "Định vị và tên thương hiệu",
+        "Nguồn/qualifiers/mâu thuẫn 12.1–12.2",
+        "Bốn sản phẩm, dự án và giới hạn",
+        "Riêng tư, consent và luật sư",
+        "Gate1/2/3 và phạm vi vai trò",
+        "Hậu kỳ"
+      ],
+      "reading": [
+        "references/knowledge.md",
+        "references/claims.json",
+        "references/sources/Bang-kiem-thong-tin.md",
+        "references/sources/San-pham-va-ky-thuat.md",
+        "references/sources/Ke-hoach-ho-so-nang-luc-OPA.md",
+        "references/sources/Du-an-va-khach.md",
+        "references/sources/Doi-ngu.md"
+      ],
+      "exercise": "exercises/agent-10-video-editor.md",
+      "reviewer": "Cường",
+      "reviewer_assignment_status": "PROPOSED_NOT_ACCEPTED",
+      "independent_evaluator": "Người duyệt được chỉ định, khác learner; evaluator chưa thực chạy",
+      "rubric": "rubric.json",
+      "result": "NOT_TESTED",
+      "evidence": [],
+      "run_later": "hermes -p agent-10-video-editor chat -q '<dán nội dung exercise, giữ dữ liệu local và tắt network/write tools theo runner đã duyệt>'",
+      "run_later_note": "Không chạy trong task này; kiểm hermes chat --help của máy trước khi cấu hình toolsets. Default cần unset HERMES_HOME/HERMES_PROFILE hoặc mở shell default, không chạy từ alias agent00."
+    },
+    {
+      "profile": "agent-11-video-qa",
+      "department": "Kiểm định video",
+      "version": "opa-1.0.0",
+      "learn": [
+        "Định vị và tên thương hiệu",
+        "Nguồn/qualifiers/mâu thuẫn 12.1–12.2",
+        "Bốn sản phẩm, dự án và giới hạn",
+        "Riêng tư, consent và luật sư",
+        "Gate1/2/3 và phạm vi vai trò",
+        "Kiểm định video"
+      ],
+      "reading": [
+        "references/knowledge.md",
+        "references/claims.json",
+        "references/sources/Bang-kiem-thong-tin.md",
+        "references/sources/San-pham-va-ky-thuat.md",
+        "references/sources/Ke-hoach-ho-so-nang-luc-OPA.md",
+        "references/sources/Du-an-va-khach.md",
+        "references/sources/Doi-ngu.md"
+      ],
+      "exercise": "exercises/agent-11-video-qa.md",
+      "reviewer": "Cường",
+      "reviewer_assignment_status": "PROPOSED_NOT_ACCEPTED",
+      "independent_evaluator": "Người duyệt được chỉ định, khác learner; evaluator chưa thực chạy",
+      "rubric": "rubric.json",
+      "result": "NOT_TESTED",
+      "evidence": [],
+      "run_later": "hermes -p agent-11-video-qa chat -q '<dán nội dung exercise, giữ dữ liệu local và tắt network/write tools theo runner đã duyệt>'",
+      "run_later_note": "Không chạy trong task này; kiểm hermes chat --help của máy trước khi cấu hình toolsets. Default cần unset HERMES_HOME/HERMES_PROFILE hoặc mở shell default, không chạy từ alias agent00."
+    },
+    {
+      "profile": "agent-12-thumbnail",
+      "department": "Thiết kế ảnh bìa",
+      "version": "opa-1.0.0",
+      "learn": [
+        "Định vị và tên thương hiệu",
+        "Nguồn/qualifiers/mâu thuẫn 12.1–12.2",
+        "Bốn sản phẩm, dự án và giới hạn",
+        "Riêng tư, consent và luật sư",
+        "Gate1/2/3 và phạm vi vai trò",
+        "Thiết kế ảnh bìa"
+      ],
+      "reading": [
+        "references/knowledge.md",
+        "references/claims.json",
+        "references/sources/Bang-kiem-thong-tin.md",
+        "references/sources/San-pham-va-ky-thuat.md",
+        "references/sources/Ke-hoach-ho-so-nang-luc-OPA.md",
+        "references/sources/Du-an-va-khach.md",
+        "references/sources/Doi-ngu.md"
+      ],
+      "exercise": "exercises/agent-12-thumbnail.md",
+      "reviewer": "Thành",
+      "reviewer_assignment_status": "PROPOSED_NOT_ACCEPTED",
+      "independent_evaluator": "Người duyệt được chỉ định, khác learner; evaluator chưa thực chạy",
+      "rubric": "rubric.json",
+      "result": "NOT_TESTED",
+      "evidence": [],
+      "run_later": "hermes -p agent-12-thumbnail chat -q '<dán nội dung exercise, giữ dữ liệu local và tắt network/write tools theo runner đã duyệt>'",
+      "run_later_note": "Không chạy trong task này; kiểm hermes chat --help của máy trước khi cấu hình toolsets. Default cần unset HERMES_HOME/HERMES_PROFILE hoặc mở shell default, không chạy từ alias agent00."
+    },
+    {
+      "profile": "agent-13-vision-qa",
+      "department": "Kiểm định hình ảnh",
+      "version": "opa-1.0.0",
+      "learn": [
+        "Định vị và tên thương hiệu",
+        "Nguồn/qualifiers/mâu thuẫn 12.1–12.2",
+        "Bốn sản phẩm, dự án và giới hạn",
+        "Riêng tư, consent và luật sư",
+        "Gate1/2/3 và phạm vi vai trò",
+        "Kiểm định hình ảnh"
+      ],
+      "reading": [
+        "references/knowledge.md",
+        "references/claims.json",
+        "references/sources/Bang-kiem-thong-tin.md",
+        "references/sources/San-pham-va-ky-thuat.md",
+        "references/sources/Ke-hoach-ho-so-nang-luc-OPA.md",
+        "references/sources/Du-an-va-khach.md",
+        "references/sources/Doi-ngu.md"
+      ],
+      "exercise": "exercises/agent-13-vision-qa.md",
+      "reviewer": "Thành + Cường",
+      "reviewer_assignment_status": "PROPOSED_NOT_ACCEPTED",
+      "independent_evaluator": "Người duyệt được chỉ định, khác learner; evaluator chưa thực chạy",
+      "rubric": "rubric.json",
+      "result": "NOT_TESTED",
+      "evidence": [],
+      "run_later": "hermes -p agent-13-vision-qa chat -q '<dán nội dung exercise, giữ dữ liệu local và tắt network/write tools theo runner đã duyệt>'",
+      "run_later_note": "Không chạy trong task này; kiểm hermes chat --help của máy trước khi cấu hình toolsets. Default cần unset HERMES_HOME/HERMES_PROFILE hoặc mở shell default, không chạy từ alias agent00."
+    },
+    {
+      "profile": "agent-14-distributor",
+      "department": "Phân phối",
+      "version": "opa-1.0.0",
+      "learn": [
+        "Định vị và tên thương hiệu",
+        "Nguồn/qualifiers/mâu thuẫn 12.1–12.2",
+        "Bốn sản phẩm, dự án và giới hạn",
+        "Riêng tư, consent và luật sư",
+        "Gate1/2/3 và phạm vi vai trò",
+        "Phân phối"
+      ],
+      "reading": [
+        "references/knowledge.md",
+        "references/claims.json",
+        "references/sources/Bang-kiem-thong-tin.md",
+        "references/sources/San-pham-va-ky-thuat.md",
+        "references/sources/Ke-hoach-ho-so-nang-luc-OPA.md",
+        "references/sources/Du-an-va-khach.md",
+        "references/sources/Doi-ngu.md"
+      ],
+      "exercise": "exercises/agent-14-distributor.md",
+      "reviewer": "Ngọc Ánh + Minh",
+      "reviewer_assignment_status": "PROPOSED_NOT_ACCEPTED",
+      "independent_evaluator": "Người duyệt được chỉ định, khác learner; evaluator chưa thực chạy",
+      "rubric": "rubric.json",
+      "result": "NOT_TESTED",
+      "evidence": [],
+      "run_later": "hermes -p agent-14-distributor chat -q '<dán nội dung exercise, giữ dữ liệu local và tắt network/write tools theo runner đã duyệt>'",
+      "run_later_note": "Không chạy trong task này; kiểm hermes chat --help của máy trước khi cấu hình toolsets. Default cần unset HERMES_HOME/HERMES_PROFILE hoặc mở shell default, không chạy từ alias agent00."
+    },
+    {
+      "profile": "agent-15-engagement",
+      "department": "Chăm sóc cộng đồng",
+      "version": "opa-1.0.0",
+      "learn": [
+        "Định vị và tên thương hiệu",
+        "Nguồn/qualifiers/mâu thuẫn 12.1–12.2",
+        "Bốn sản phẩm, dự án và giới hạn",
+        "Riêng tư, consent và luật sư",
+        "Gate1/2/3 và phạm vi vai trò",
+        "Chăm sóc cộng đồng"
+      ],
+      "reading": [
+        "references/knowledge.md",
+        "references/claims.json",
+        "references/sources/Bang-kiem-thong-tin.md",
+        "references/sources/San-pham-va-ky-thuat.md",
+        "references/sources/Ke-hoach-ho-so-nang-luc-OPA.md",
+        "references/sources/Du-an-va-khach.md",
+        "references/sources/Doi-ngu.md"
+      ],
+      "exercise": "exercises/agent-15-engagement.md",
+      "reviewer": "Anh Huy",
+      "reviewer_assignment_status": "PROPOSED_NOT_ACCEPTED",
+      "independent_evaluator": "Người duyệt được chỉ định, khác learner; evaluator chưa thực chạy",
+      "rubric": "rubric.json",
+      "result": "NOT_TESTED",
+      "evidence": [],
+      "run_later": "hermes -p agent-15-engagement chat -q '<dán nội dung exercise, giữ dữ liệu local và tắt network/write tools theo runner đã duyệt>'",
+      "run_later_note": "Không chạy trong task này; kiểm hermes chat --help của máy trước khi cấu hình toolsets. Default cần unset HERMES_HOME/HERMES_PROFILE hoặc mở shell default, không chạy từ alias agent00."
+    },
+    {
+      "profile": "agent-16-analytics",
+      "department": "Phân tích số liệu",
+      "version": "opa-1.0.0",
+      "learn": [
+        "Định vị và tên thương hiệu",
+        "Nguồn/qualifiers/mâu thuẫn 12.1–12.2",
+        "Bốn sản phẩm, dự án và giới hạn",
+        "Riêng tư, consent và luật sư",
+        "Gate1/2/3 và phạm vi vai trò",
+        "Phân tích số liệu"
+      ],
+      "reading": [
+        "references/knowledge.md",
+        "references/claims.json",
+        "references/sources/Bang-kiem-thong-tin.md",
+        "references/sources/San-pham-va-ky-thuat.md",
+        "references/sources/Ke-hoach-ho-so-nang-luc-OPA.md",
+        "references/sources/Du-an-va-khach.md",
+        "references/sources/Doi-ngu.md"
+      ],
+      "exercise": "exercises/agent-16-analytics.md",
+      "reviewer": "Hải + Ngọc Ánh",
+      "reviewer_assignment_status": "PROPOSED_NOT_ACCEPTED",
+      "independent_evaluator": "Người duyệt được chỉ định, khác learner; evaluator chưa thực chạy",
+      "rubric": "rubric.json",
+      "result": "NOT_TESTED",
+      "evidence": [],
+      "run_later": "hermes -p agent-16-analytics chat -q '<dán nội dung exercise, giữ dữ liệu local và tắt network/write tools theo runner đã duyệt>'",
+      "run_later_note": "Không chạy trong task này; kiểm hermes chat --help của máy trước khi cấu hình toolsets. Default cần unset HERMES_HOME/HERMES_PROFILE hoặc mở shell default, không chạy từ alias agent00."
+    },
+    {
+      "profile": "agent-17-web-designer",
+      "department": "Thiết kế website",
+      "version": "opa-1.0.0",
+      "learn": [
+        "Định vị và tên thương hiệu",
+        "Nguồn/qualifiers/mâu thuẫn 12.1–12.2",
+        "Bốn sản phẩm, dự án và giới hạn",
+        "Riêng tư, consent và luật sư",
+        "Gate1/2/3 và phạm vi vai trò",
+        "Thiết kế website"
+      ],
+      "reading": [
+        "references/knowledge.md",
+        "references/claims.json",
+        "references/sources/Bang-kiem-thong-tin.md",
+        "references/sources/San-pham-va-ky-thuat.md",
+        "references/sources/Ke-hoach-ho-so-nang-luc-OPA.md",
+        "references/sources/Du-an-va-khach.md",
+        "references/sources/Doi-ngu.md"
+      ],
+      "exercise": "exercises/agent-17-web-designer.md",
+      "reviewer": "Phương + Ngọc Ánh",
+      "reviewer_assignment_status": "PROPOSED_NOT_ACCEPTED",
+      "independent_evaluator": "Người duyệt được chỉ định, khác learner; evaluator chưa thực chạy",
+      "rubric": "rubric.json",
+      "result": "NOT_TESTED",
+      "evidence": [],
+      "run_later": "hermes -p agent-17-web-designer chat -q '<dán nội dung exercise, giữ dữ liệu local và tắt network/write tools theo runner đã duyệt>'",
+      "run_later_note": "Không chạy trong task này; kiểm hermes chat --help của máy trước khi cấu hình toolsets. Default cần unset HERMES_HOME/HERMES_PROFILE hoặc mở shell default, không chạy từ alias agent00."
+    },
+    {
+      "profile": "agent-18-brand-designer",
+      "department": "Nhận diện thương hiệu",
+      "version": "opa-1.0.0",
+      "learn": [
+        "Định vị và tên thương hiệu",
+        "Nguồn/qualifiers/mâu thuẫn 12.1–12.2",
+        "Bốn sản phẩm, dự án và giới hạn",
+        "Riêng tư, consent và luật sư",
+        "Gate1/2/3 và phạm vi vai trò",
+        "Nhận diện thương hiệu"
+      ],
+      "reading": [
+        "references/knowledge.md",
+        "references/claims.json",
+        "references/sources/Bang-kiem-thong-tin.md",
+        "references/sources/San-pham-va-ky-thuat.md",
+        "references/sources/Ke-hoach-ho-so-nang-luc-OPA.md",
+        "references/sources/Du-an-va-khach.md",
+        "references/sources/Doi-ngu.md"
+      ],
+      "exercise": "exercises/agent-18-brand-designer.md",
+      "reviewer": "Thành",
+      "reviewer_assignment_status": "PROPOSED_NOT_ACCEPTED",
+      "independent_evaluator": "Người duyệt được chỉ định, khác learner; evaluator chưa thực chạy",
+      "rubric": "rubric.json",
+      "result": "NOT_TESTED",
+      "evidence": [],
+      "run_later": "hermes -p agent-18-brand-designer chat -q '<dán nội dung exercise, giữ dữ liệu local và tắt network/write tools theo runner đã duyệt>'",
+      "run_later_note": "Không chạy trong task này; kiểm hermes chat --help của máy trước khi cấu hình toolsets. Default cần unset HERMES_HOME/HERMES_PROFILE hoặc mở shell default, không chạy từ alias agent00."
+    }
+  ]
+}

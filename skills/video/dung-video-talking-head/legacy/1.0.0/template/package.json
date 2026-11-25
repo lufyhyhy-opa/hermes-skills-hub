@@ -1,0 +1,22 @@
+{
+  "name": "talking-head-edit",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "remotion studio src/index.ts",
+    "build": "python scripts/build.py",
+    "render": "remotion render src/index.ts Main out/final.mp4 --concurrency=4 --crf=18",
+    "still": "remotion still src/index.ts Main",
+    "check": "python scripts/check_av_sync.py out/final.mp4"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.484",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "remotion": "4.0.484"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.17",
+    "typescript": "6.0.3"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "sources": [
+    {
+      "url": "https://hermes-agent.nousresearch.com/docs/user-guide/features/skills",
+      "design_basis": "SKILL.md gọn và references tải khi cần; cài vào home riêng từng profile"
+    },
+    {
+      "url": "https://hermes-agent.nousresearch.com/docs/user-guide/features/context-files",
+      "design_basis": "SOUL.md từ HERMES_HOME, context project có precedence; không ghi đè SOUL/context có sẵn"
+    },
+    {
+      "url": "https://hermes-agent.nousresearch.com/docs/user-guide/profiles",
+      "design_basis": "Default home khác named profiles; cô lập skills/memory/config"
+    }
+  ],
+  "note": "Đã đọc qua web_extract; chỉ truy official docs, không gửi nguồn OPA. Hai URL user-guide/skills và user-guide/context-files ban đầu 404, đã tìm đúng features/."
+}

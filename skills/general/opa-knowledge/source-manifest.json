@@ -1,0 +1,77 @@
+{
+  "sources": [
+    {
+      "id": "Bang-kiem-thong-tin.md",
+      "original_path": "/Users/buithiphuongthao/.hermes/profiles/agent-00-orchestrator/attachments/Bang-kiem-thong-tin.md",
+      "pack_path": "references/sources/Bang-kiem-thong-tin.md",
+      "sha256": "897a85376cf07494424291d3e0aef827b135e94056ff6e387f8a6eb661b97ce2",
+      "bytes": 34493,
+      "source_date": "2026-10-31",
+      "classification": "PRIVATE_LOCAL_ONLY",
+      "verification": "LOCAL_DOCUMENT_READ_NOT_CURRENT_EXTERNAL_FACT_VERIFICATION"
+    },
+    {
+      "id": "San-pham-va-ky-thuat.md",
+      "original_path": "/Users/buithiphuongthao/.hermes/profiles/agent-00-orchestrator/attachments/San-pham-va-ky-thuat.md",
+      "pack_path": "references/sources/San-pham-va-ky-thuat.md",
+      "sha256": "3bf7eb6642d80bb02630c544e5e65b888515a191a020406341bff602b6736a9d",
+      "bytes": 52774,
+      "source_date": "2026-10-31",
+      "classification": "PRIVATE_LOCAL_ONLY",
+      "verification": "LOCAL_DOCUMENT_READ_NOT_CURRENT_EXTERNAL_FACT_VERIFICATION"
+    },
+    {
+      "id": "Ke-hoach-ho-so-nang-luc-OPA.md",
+      "original_path": "/Users/buithiphuongthao/.hermes/profiles/agent-00-orchestrator/attachments/Ke-hoach-ho-so-nang-luc-OPA.md",
+      "pack_path": "references/sources/Ke-hoach-ho-so-nang-luc-OPA.md",
+      "sha256": "95a6f91904a46616d3b2cce2b6157b40a2e30e84c421e781b8083bc8ae2aedbf",
+      "bytes": 70804,
+      "source_date": "2026-10-31",
+      "classification": "PRIVATE_LOCAL_ONLY",
+      "verification": "LOCAL_DOCUMENT_READ_NOT_CURRENT_EXTERNAL_FACT_VERIFICATION"
+    },
+    {
+      "id": "Du-an-va-khach.md",
+      "original_path": "/Users/buithiphuongthao/.hermes/profiles/agent-00-orchestrator/attachments/Du-an-va-khach.md",
+      "pack_path": "references/sources/Du-an-va-khach.md",
+      "sha256": "6950c10d9da720443cc7ecb7620dea102bd015002a9cef94ef18238c2a35a8b6",
+      "bytes": 29625,
+      "source_date": "2026-10-31",
+      "classification": "PRIVATE_LOCAL_ONLY",
+      "verification": "LOCAL_DOCUMENT_READ_NOT_CURRENT_EXTERNAL_FACT_VERIFICATION"
+    },
+    {
+      "id": "Doi-ngu.md",
+      "original_path": "/Users/buithiphuongthao/.hermes/profiles/agent-00-orchestrator/attachments/Doi-ngu.md",
+      "pack_path": "references/sources/Doi-ngu.md",
+      "sha256": "68551ea0843089d177f0de64672423f1a907dd0fd9a4088de7b220404e36ccd9",
+      "bytes": 24194,
+      "source_date": "2026-10-31",
+      "classification": "PRIVATE_LOCAL_ONLY",
+      "verification": "LOCAL_DOCUMENT_READ_NOT_CURRENT_EXTERNAL_FACT_VERIFICATION"
+    }
+  ],
+  "targets": [
+    "default",
+    "agent-00-orchestrator",
+    "agent-01-research",
+    "agent-02-plan",
+    "agent-03-outline",
+    "agent-04-copywriter",
+    "agent-05-quality-gate",
+    "agent-06-fact-check",
+    "agent-07-repurpose",
+    "agent-08-carousel",
+    "agent-09-scriptwriter",
+    "agent-10-video-editor",
+    "agent-11-video-qa",
+    "agent-12-thumbnail",
+    "agent-13-vision-qa",
+    "agent-14-distributor",
+    "agent-15-engagement",
+    "agent-16-analytics",
+    "agent-17-web-designer",
+    "agent-18-brand-designer"
+  ],
+  "target_count": 20
+}

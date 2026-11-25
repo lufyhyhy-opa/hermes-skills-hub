@@ -1,0 +1,43 @@
+{
+  "source": "D:/MMO/Van Minh AI/Vid Heygen/2/2.mp4",
+  "fix": {},
+  "hook": { "text": "20", "color": "warn" },
+  "blocks": [
+    { "id": "b01", "top": [0, 3], "hero": [3, 7], "bottom": [8, 9], "style": "stomp", "color": "warn" },
+    { "id": "b02", "top": [9, 13], "hero": [13, 18], "bottom": [18, 21], "style": "stomp", "color": "gold" },
+    { "id": "b03", "top": [21, 24], "hero": [24, 26], "bottom": [26, 28], "style": "script" },
+    { "id": "b04", "top": [49, 55], "hero": [55, 59], "bottom": [59, 64], "style": "script" },
+    { "id": "b05", "top": [64, 67], "hero": [67, 72], "bottom": [72, 76], "style": "script" },
+    { "id": "b06", "top": [76, 79], "hero": [79, 82], "bottom": [82, 88], "style": "stomp", "color": "warn" },
+    { "id": "b07", "top": [88, 90], "hero": [90, 93], "style": "stomp", "color": "gold" },
+    { "id": "b08", "top": [93, 96], "hero": [96, 98], "bottom": [98, 102], "style": "script" },
+    { "id": "b09", "top": [102, 108], "hero": [108, 113], "style": "script", "accent": 3 },
+    { "id": "b10", "top": [113, 117], "hero": [117, 123], "bottom": [123, 127], "style": "script" },
+    { "id": "b11", "top": [127, 129], "hero": [129, 133], "style": "script" },
+    { "id": "b12", "top": [133, 138], "hero": [138, 144], "bottom": [144, 147], "style": "script" },
+    { "id": "b13", "top": [147, 151], "hero": [151, 156], "bottom": [156, 162], "style": "stomp", "color": "gold" }
+  ],
+  "steps": {
+    "title": "5 TÀI SẢN TỪ 1 ẢNH",
+    "items": [
+      { "range": [28, 32], "label": "Hero cho website" },
+      { "range": [32, 36], "label": "Lifestyle Facebook" },
+      { "range": [36, 40], "label": "Cận chất liệu" },
+      { "range": [40, 44], "label": "Video dọc Reels" },
+      { "range": [44, 49], "label": "Banner quảng cáo" }
+    ]
+  },
+  "shots": [
+    { "t": 0.0, "s0": 1.12, "s1": 1.18 },
+    { "t": 3.80, "s0": 1.00, "s1": 1.04 },
+    { "t": 7.42, "s0": 1.16, "s1": 1.20, "y": -0.06 },
+    { "t": 14.52, "s0": 1.02, "s1": 1.06 },
+    { "t": 18.50, "s0": 1.14, "s1": 1.18 },
+    { "t": 22.03, "s0": 1.04, "s1": 1.08 },
+    { "t": 24.70, "s0": 1.16, "s1": 1.20 },
+    { "t": 30.70, "s0": 1.02, "s1": 1.06 },
+    { "t": 33.60, "s0": 1.12, "s1": 1.16 },
+    { "t": 38.80, "s0": 1.06, "s1": 1.18 }
+  ],
+  "cta": { "label": "Bình luận", "keyword": "5 TÀI SẢN", "start": 40.0 }
+}

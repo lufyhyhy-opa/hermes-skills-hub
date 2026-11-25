@@ -1,0 +1,467 @@
+# Hy Memory 使用指南
+
+本文只描述当前 `HyMemoryClient` 已公开的方法和返回结构。
+
+## 安装与快速开始
+
+```bash
+pip install hy-memory==2.0.4
+
+# 可选后端
+pip install 'hy-memory[qdrant]==2.0.4'
+pip install 'hy-memory[faiss]==2.0.4'
+pip install 'hy-memory[graph]==2.0.4'     # Neo4j；Kuzu 已在核心依赖中
+pip install 'hy-memory[mysql]==2.0.4'
+pip install 'hy-memory[rerank]==2.0.4'    # 本地多语言 cross-encoder rerank
+```
+
+默认 LLM 和 Embedding 均使用 OpenAI-compatible 接口。使用 OpenAI 时可只设置：
+
+```bash
+export OPENAI_API_KEY="sk-your-key"
+```
+
+```python
+from hy_memory import HyMemoryClient
+
+with HyMemoryClient(mode="pro") as client:
+    client.add(
+        "用户喜欢科幻电影，特别是《星际穿越》",
+        user_id="user_001",
+    )
+    result = client.search(
+        "用户喜欢什么？",
+        user_ids=["user_001"],
+    )
+    for channel, memories in result["memories"].items():
+        for memory in memories:
+            print(channel, memory["score"], memory["content"])
+```
+
+## 业务存储
+
+Working / Coding 业务数据默认使用 SQLite，也支持 PostgreSQL；向量配置独立。安装、部署和切换边界见 [业务存储后端](business_storage.md)。
+
+## 配置
+
+SDK 会加载项目目录中的 `.env`。完整配置见 [env_reference.md](env_reference.md)。
+
+```bash
+MEMORY_MODE=pro
+MEMORY_LLM_MODEL=deepseek-chat
+MEMORY_LLM_API_KEY=sk-your-key
+MEMORY_LLM_BASE_URL=https://api.deepseek.com
+MEMORY_EMBEDDER_MODEL=text-embedding-v4
+MEMORY_EMBEDDER_API_KEY=sk-your-key
+MEMORY_EMBEDDER_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
+MEMORY_EMBEDDING_DIMS=1024
+```
+
+也可以使用当前公开的 `from_config()`：
+
+```python
+client = HyMemoryClient.from_config({
+    "mode": "pro",
+    "llm": {
+        "model": "deepseek-chat",
+        "api_key": "sk-xxx",
+        "base_url": "https://api.deepseek.com",
+    },
+    "embedder": {
+        "model": "text-embedding-v4",
+        "api_key": "sk-xxx",
+        "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+        "embedding_dims": 1024,
+    },
+    "vector_store": {
+        "provider": "chroma",
+        "embedding_dims": 1024,
+    },
+})
+```
+
+通过 `from_config()` 配置时，Embedder 与 Vector Store 的维度是两个独立字段，必须保持
+一致；环境变量方式则统一使用 `MEMORY_EMBEDDING_DIMS`。
+
+支持的向量后端为 `chroma`、`qdrant`、`faiss`。Graph 后端通常使用
+`kuzu` 或 `neo4j`。
+
+## Client API
+
+同步和异步方法使用相同参数。异步方法以 `async_` 为前缀。
+
+### `add()` / `async_add()`
+
+```python
+result = client.add(
+    [
+        {"role": "user", "content": "推荐一部电影"},
+        {"role": "assistant", "content": "推荐《星际穿越》"},
+    ],
+    user_id="user_001",
+    agent_id="default_agent",
+    session_id="default_session",
+    source="openclaw",
+    scene=None,
+    memory_at=None,
+    metadata=None,
+    meta=None,
+    embed_override=None,
+    language=None,
+)
+```
+
+`metadata` 与 `meta` 不是同一字段：
+
+- `metadata` 是兼容旧调用方保留的 SDK 处理选项，会进入内部
+  `WriteRequest.extra`，不保证持久化或随查询结果返回。
+- `meta` 是调用方的业务上下文，会持久化并在 `search()`、`get()` 等结果中返回。
+  同一记忆被多次合并时，各次 `meta` 会按写入顺序保存在列表中。
+
+需要以后读回的数据必须放在 `meta`，不要放在 `metadata`。
+
+`scene` 的公开取值：
+
+- `None`：普通文本直接走 chat；messages 含 tool 时执行快速场景判断。
+- `chat`：强制走普通记忆链路。
+- `working`：强制走生产力记忆链路。
+- `coding`：强制走软件工程变体，并维护版本演进链。
+
+强制 `working` / `coding` 时输入必须含 tool 消息，否则回退 chat。普通 chat 写入返回
+`success`、`scene`、`memory_id`、`request_id`、`elapsed_ms` 等字段；生产力链路返回其
+双层 reconcile 操作、`experience_ids`、`fact_ids` 等字段，完整结构见
+[scene_coding_usage.md](scene_coding_usage.md#4-返回结构)。
+
+写入失败时 `success=False`，`error_code` 为 HTTP 风格的整数，`agent_error_code` 给出稳定
+失败码。pro / ultra 的 reconcile（新事实与已有记忆判重、合并）模型调用失败、返回空
+content 或回复解析不出时，`add` 与 `add_extracted` 都报 `agent_error_code="RECONCILE_FAILED"`，
+具体原因在 `reconcile_error_code`（`LLM_UNAVAILABLE` / `EMPTY_RESPONSE` /
+`JSON_PARSE_FAILED` / `RECONCILE_EXCEPTION`）。此时本次一条新记忆都不落库，`add` 已写入
+的原始对话按抽取失败同样回滚（`l1_rollback.retry_safe=True`）；模型恢复后换一个
+`request_id` 重跑即可。`RECONCILE_ENABLED=false` 时不调用 reconcile，直接写入。
+
+`mode="lite"` 不执行 LLM 抽取，写入内容直接以 `L1_RAW` 形式保存。lite 的 Search 是
+严格的 raw-only 向量检索：无论调用方传入什么 `layers`、`scene` 或 `search_mode`，都只
+召回 `L1_RAW`，不会进入 working/coding、Schema 或 Intention 链路，也不会调用场景判断
+LLM。pro / ultra 仍遵循各自的层级与场景参数，默认不公开原始对话。
+
+`source` 是调用方应用来源，例如 `openclaw`、`cursor`、`codex`。它与 `agent_id`
+正交：前者说明“从哪个产品/入口写入”，后者仍是记忆隔离中的 agent 身份。source 会
+执行 `strip().lower()` 后存储，并随 chat、working、coding 记忆一起返回。
+
+### 提示词语言（`language`）
+
+SDK 的 LLM 提示词提供 11 种语言，按语言码注册在 `hy_memory/prompts/`
+（每种语言一个模块，`get_prompt(name, language)` 统一取用）：
+
+| 语言码 | 语言 | 别名 |
+|---|---|---|
+| `en` | English | `en-US`、`en-GB` |
+| `zh-Hans` | 简体中文 | `zh`、`zh-CN`、`zh-SG` |
+| `zh-Hant` | 繁體中文 | `zh-TW`、`zh-HK`、`zh-MO` |
+| `ja` | 日本語 | |
+| `es` | Español | |
+| `de` | Deutsch | |
+| `pt` | Português | `pt-BR`、`pt-PT` |
+| `fr` | Français | |
+| `ko` | 한국어 | |
+| `ru` | Русский | |
+| `id` | Bahasa Indonesia | |
+
+语言码大小写不敏感，`_` 与 `-` 等价；未知语言码抛 `ValueError` 并列出支持的语言码。
+
+```python
+# client 默认值（也可用环境变量 MEMORY_LANGUAGE=ja）
+client = HyMemoryClient.from_config({"mode": "pro", "language": "ja"})
+
+# per-call 覆盖 client 默认值
+client.add(messages, user_id="u1", language="de")
+client.add_extracted(["Der Nutzer trinkt keinen Kaffee."], user_id="u1", language="de")
+client.finalize_session(user_id="u1", session_id="s1", language="de")
+client.evolve(user_id="u1", language="de")   # ultra
+client.sweep(user_ids=["u1"], language="de")  # ultra
+```
+
+优先级：per-call `language` > `MemoryConfig.language`（`MEMORY_LANGUAGE`）> 自动检测。
+
+- **未指定语言（默认）**：行为与以前完全一致。SDK 按输入做 zh/en 自动检测，中文输入用
+  简体中文提示词，其余用英文提示词；自动检测不会选到其他语言。提示词里的「输出语言与
+  输入语言一致」规则仍然生效，所以记忆正文保持对话的原始语言。
+- **显式指定语言**：本次请求的全部 LLM 调用（抽取、基础画像、reconcile、working /
+  coding 链路的抽取与两个 reconciler 及演变总结、episode / topic 摘要、System 2）都使用
+  该语言的提示词，并在提示词末尾追加该语言的「输出语言」规则：记忆正文、摘要等自然语言
+  字段一律用该语言书写，即使对话是另一种语言。JSON 键、字段名、枚举值、代码、路径、
+  报错信息和专有名词保持原样；tags 仍是英文小写关键词。
+- 只有英文版的提示词（session / dynamic episode、cross-domain sweeper）在显式指定语言时
+  同样追加该输出规则；搜索侧的场景判断 / query rewrite 只有英文版且保持 query 原语言，
+  因此 `search()` 不接受 `language`。
+- 自定义 `extract_system_prompt_zh` / `extract_system_prompt_en` 只覆盖 `zh-Hans` / `en`。
+
+### `search()` / `async_search()`
+
+普通 chat 检索：
+
+```python
+result = client.search(
+    query="用户喜欢什么？",
+    user_ids=["user_001"],
+    agent_ids=None,
+    session_ids=None,
+    include_sources=["openclaw", "codex"],
+    exclude_sources=["cursor"],
+    limit=10,
+    min_score=0.4,
+    schema_limit=10,
+    schema_min_score=0.4,
+    intention_limit=0,
+    reader="",                  # HY_MEMORY_READER；默认 legacy
+    layers=None,
+    created_after=None,
+    search_mode="default",
+)
+```
+
+source 过滤语义为：
+
+```text
+source IN include_sources AND source NOT IN exclude_sources
+```
+
+任一列表为空时省略对应条件；两者冲突时黑名单优先。Chroma/Qdrant/Graph 会在数据库
+候选截断前执行过滤，FAISS 使用 ID selector 在索引搜索前限定候选，不采用多路召回或
+扩大 top-k 后过滤。多来源证据派生出的聚合记忆标记为 `mixed`；开启任意 source 过滤
+时默认排除 `mixed`，只有显式将 `mixed` 放入白名单才返回。
+
+chat 成功路径返回：
+
+```python
+{
+    "request_id": "...",
+    "memories": {
+        "normal": [],      # L2/L3 普通记忆；L4/L5 当前未启用
+        "schema": [],      # L6 Schema
+        "proactive": [],   # L7 Intention；默认关闭
+    },
+    "rewrite": {
+        "used": False,
+        "original_query": "用户喜欢什么？",
+        "effective_query": "用户喜欢什么？",
+        "created_after": None,
+        "scene": "normal",
+    },
+    "elapsed_ms": 12.3,
+}
+```
+
+Reader 执行失败时返回空的 `memories` 三桶和 `request_id` / `elapsed_ms`；当前失败兜底不
+包含 `rewrite`。
+
+L0 用户画像不在 Search 中。`schema_limit` 只控制 L6，不会被 L0 占位。
+
+Search 也可以路由到独立生产力记忆库：
+
+```python
+result = client.search(
+    "这个异常最后是怎么修复的？",
+    user_ids=["user_001"],
+    scene="coding",
+    workspace_id="repo-id",
+    branch="main",
+)
+```
+
+`working` / `coding` 路径返回 `scene="productivity"`、`facts`、`experiences`，不使用
+chat 的三桶结构；`coding` 还会返回 `chain_block` 和 `chain_used` 字段（默认空；
+需 `MEMORY_CODING_CHAIN_BLOCK_ENABLED=true` 才注入 diff 块）。
+
+#### `search_mode`
+
+| `search_mode` | `scene` | 行为 |
+|---|---|---|
+| `default` | `None` + 单个 `query` | 固定 chat/normal，零 LLM |
+| `default` | `None` + `queries=[...]` | 行为由 Coding 与 Query Rewrite 开关共同决定，见下表 |
+| `agentic` | `None` + 单/多 query | 一次 LLM 完成场景判断、改写和时间解析 |
+| 任意 | 显式 `chat/working/coding` | 直接路由，不调用 judge/rewrite LLM |
+
+`query` 与 `queries` 二选一；`queries` 最后一项是目标 query，前面的项用于上下文消解。
+LLM 或解析失败时回退到 chat/normal 和原 query。
+
+default 多-query 在总字符数不超过 `MEMORY_QUERY_REWRITE_MAX_CHARS` 时：
+
+| `MEMORY_CODING_ENABLED` | `MEMORY_ENABLE_QUERY_REWRITE` | 行为 |
+|---|---|---|
+| `true` | 任意 | 一次 LLM 完成 `chat / working / coding` 分类和 query rewrite |
+| `false` | `true` | 一次 LLM 完成 rewrite 与时间解析，不做场景分类 |
+| `false` | `false` | 零 LLM，固定 chat/normal，使用最后一条 query |
+
+超过长度保护时不做 rewrite；Coding 开启时只执行有界场景分类，关闭时零 LLM。
+
+### `get_user_profile()` / `async_get_user_profile()`
+
+用户画像只由 `user_id` 唯一确定，不接收 `agent_id` 或 `session_id`：
+
+```python
+result = client.get_user_profile(user_id="user_001")
+profile = result["profile"]
+```
+
+```python
+{
+    "request_id": "...",
+    "profile": {
+        "memory_id": "...",
+        "user_id": "user_001",
+        "content": "...",
+        "layer": "l0_basic_info",
+        "basic_info": {"name": "Alice"},
+        "catalog": {"attached": False},
+        "supplement": {"attached": False},
+        "tags": [],
+        "memory_at": 1234567890,
+        "gmt_created": 1234567890,
+    },
+    "elapsed_ms": 1.2,
+}
+```
+
+不存在 L0 且没有可附加的 balanced catalog 时，`profile` 为 `None`。该接口不调用
+Embedding 或 LLM。启用对应开关后，active catalog 和 supplement 会附加到同一画像；
+catalog 也可以在没有基础 L0 时形成只读的合成画像。
+
+### CRUD、列表与克隆
+
+以下均为当前公开方法：
+
+```python
+memory = client.get("memory_id")
+# raw ID 返回 L1_RAW，fact ID 返回对应事实层。
+raw_memory = client.get("raw_id")
+result = client.update("memory_id", "更新后的内容")
+result = client.delete("memory_id")
+result = client.delete_all(user_id="user_001")
+
+page = client.list_memories(
+    user_id="user_001",
+    limit=100,
+    offset=0,
+    order="desc",
+    layers=["l1_raw"],  # 显式列出 raw；不传仍沿用默认语义层列表
+    with_evolution=False,
+)
+
+result = client.clone_user("user_001", "user_002", agent_id=None)
+
+# 备份 / 恢复：按原 id 与向量导出、写回一个用户（向量库全部层级与状态，含 raw）
+exported = client.export_user_memories("user_001")
+restored = other_client.import_user_memories("user_001", exported["nodes"])
+```
+
+启用图写入时，`update()` 和 `async_update()` 会在返回前同步已有 chat 图节点的正文。
+这项编辑保留节点的标签和已有关系边，不创建新的图节点。图写入失败时，返回的
+`success` 仍表示向量库已保存，并附加 `graph_sync_failed: true` 表明图可能仍是旧内容。
+
+对应异步方法为 `async_get()`、`async_update()`、`async_delete()`、
+`async_delete_all()`、`async_list_memories()`、`async_clone_user()`、
+`async_export_user_memories()`、`async_import_user_memories()`。
+
+`export_user_memories()` 返回该用户向量库里的每个节点（`MemoryNode.to_dict()`，
+默认带 `embedding`），每个层级（含 `L1_RAW`）、每种状态（含 superseded / shadow），
+并给出 `embedding_dims` 与 `embedding_model`。`import_user_memories()` 把这些节点
+原样写回：保留 `node_id`、层级、状态、演化链指针与时间；带向量的按原向量写入
+（宽度必须与目标向量库一致），不带的用当前 embedding 服务重算。目标用户默认
+必须为空，写入失败会回滚。两者都不碰图库：图是派生数据，恢复后用
+`build_memory_graph()` 重建。Chroma、Qdrant、FAISS 后端都适用。
+
+Qdrant BM25 schema/backfill 是显式维护操作，不在普通初始化时修改远程数据：
+
+```python
+plan = client.plan_qdrant_bm25_upgrade()  # 只读；不会加载或下载模型
+
+# 仅在所有写入者均已停止的维护窗口执行。
+if plan["state"] == "upgrade_required":
+    result = client.upgrade_qdrant_bm25(
+        writers_stopped=True,
+        batch_size=256,
+    )
+```
+
+升级使用 Qdrant 1.18+ 原生 named sparse vector 与 IDF modifier，只回填派生的
+`bm25` vector；不会改 dense vector、用户 payload 字段或 point id。Qdrant 服务端过旧、
+FastEmbed 不可用或覆盖校验失败时返回结构化 `blocked`/失败状态，不删除 collection。
+空文本或零 token 文档不写 sparse，而是在同一 Qdrant point 中写 SDK 私有派生
+payload 状态 `_hy_memory_bm25_state=empty`，用于明确记录 coverage；不会引入
+可搜索 sentinel、外部索引或旁路状态。返回值中的 `schema_ready`、`reader_enabled` 和
+`resumable` 分别说明 schema、读取开关和可重跑状态。
+
+实例内锁只防止同一 `HyMemoryClient` 重复执行升级，不是跨进程停写锁；
+`writers_stopped=True` 是调用方对整个部署维护窗口的承诺。此 API 仅属于
+Hy Memory SDK 2.0.17；普通启动和 MemHub 桌面 Runtime/CLI 都不会自动执行，
+MemHub 的 SDK pin、离线 FastEmbed 资源和维护入口将在后续独立接入。
+对应异步方法为 `async_plan_qdrant_bm25_upgrade()` 和
+`async_upgrade_qdrant_bm25()`。
+
+`get()` / `async_get()` 是统一的 ID 精确读取：返回结果的 `layer`、`kind` 和
+`variant` 表明实际类型。授权由调用 SDK 前的产品边界完成，不由 SDK 根据 layer
+猜测。`list_memories()` 默认仍不包含 `L1_RAW`；显式传
+`layers=["l1_raw"]` 时按同一列表合同返回 raw。
+
+普通 `list_memories()` 返回 `vdb` 桶，并在 Graph 有结果时附带 `graph`；传入
+`workspace_id` 时返回生产力记忆的 `scene="productivity"` 和 `experiences`。
+
+### `evolve()` / `async_evolve()`（Ultra）
+
+System 2 不在 `add()` 中自动触发，当前也没有 `get_write_status()` 接口。调用方完成一批
+写入后显式执行：
+
+```python
+result = client.evolve(
+    user_id="user_001",
+    agent_id="default_agent",
+)
+```
+
+`evolve()` 仅允许 `mode="ultra"`；同步方法阻塞到本次认知加工完成。它读取当前 VDB
+全量，生成或更新 L6 Schema，并执行配置允许的 System 2 处理。
+
+### 其他当前公开方法
+
+- `finalize_session()` / `async_finalize_session()`：在功能开关开启时归档指定 session。
+- `get_user_basic_info()` / `async_get_user_basic_info()`：读取 L0 basic info 记录。
+- `sweep()` / `async_sweep()`：Ultra 下显式执行 cross-domain sweeper。
+- `get_metrics()` / `async_get_metrics()`：读取 SDK 指标。
+- `build_memory_graph()` / `async_build_memory_graph()`：回填普通记忆关系图。
+- `build_entity_store()` / `async_build_entity_store()`：回填独立 Entity Store。
+- `history()` / `async_history()`、`get_recent_history()` / `async_get_recent_history()`。
+
+## Embedding 端点覆盖
+
+`add()` / `async_add()` / `search()` / `async_search()` 支持 per-call
+`embed_override`：
+
+```python
+override = {
+    "base_url": "http://embedding-host:8000/v1",
+    "api_key": "sk-xxx",
+    "extra_headers": {"X-Route": "direct"},
+    "timeout": 15,
+}
+client.add("用户喜欢篮球", user_id="u1", embed_override=override)
+client.search("兴趣爱好", user_ids=["u1"], embed_override=override)
+```
+
+它只覆盖接入端点，不覆盖 model、维度或 `extra_body`。新端点必须运行与已入库数据兼容的
+Embedding 模型。
+
+## 数据隔离与处理模式
+
+普通记忆使用 `user_id → agent_id → session_id` 三层作用域。Search 必须传非空
+`user_ids`；不传 `agent_ids` / `session_ids` 时可跨对应维度检索。
+
+用户画像是例外：L0、balanced catalog 和 specific supplement 从生成到读取都只由
+`user_id` 唯一确定。
+
+- `lite`：原文向量化，不调用提取 LLM。
+- `pro`：Embedding + LLM 提取 + reconcile；Graph 可通过 `MEMORY_ENABLE_GRAPH` 开启。
+- `ultra`：具备 pro 能力并强制启用 Graph；System 2 由调用方显式调用 `evolve()`。
+
+Reader、Rerank 和 Search 参数详见 [hy_memory_search_skill.md](hy_memory_search_skill.md)。

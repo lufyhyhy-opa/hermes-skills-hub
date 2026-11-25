@@ -1,0 +1,55 @@
+{
+  "source": "D:/MMO/Van Minh AI/Vid Heygen/1/1.mp4",
+  "fix": {
+    "118": "Ánh sáng",
+    "152": "bằng", "153": "ngôn", "154": "ngữ", "155": "ánh", "156": "sáng",
+    "163": "prompt"
+  },
+  "hook": { "text": "90%", "color": "gold" },
+  "blocks": [
+    { "id": "b01", "top": [2, 4],     "hero": [4, 6],     "bottom": [6, 12],   "style": "stomp", "color": "warn" },
+    { "id": "b02", "top": [12, 15],   "hero": [15, 19],   "bottom": [19, 23],  "style": "script" },
+    { "id": "b03", "top": [23, 27],   "hero": [27, 31],                        "style": "script" },
+    { "id": "b04", "top": [31, 35],   "hero": [35, 39],                        "style": "script", "accent": 3 },
+    { "id": "b05", "top": [39, 42],   "hero": [42, 46],                        "style": "script", "accent": 1 },
+    { "id": "b06", "top": [46, 50],   "hero": [50, 55],                        "style": "script" },
+    { "id": "b07", "top": [55, 57],   "hero": [57, 62],                        "style": "script" },
+    { "id": "b08", "top": [62, 67],   "hero": [67, 70],   "bottom": [70, 72],  "style": "stomp", "color": "gold" },
+    { "id": "b13", "top": [95, 98],   "hero": [98, 102],  "bottom": [102, 105],"style": "script" },
+    { "id": "b14", "top": [105, 106], "hero": [106, 111],                      "style": "script" },
+    { "id": "b15", "top": [111, 115], "hero": [115, 118],                      "style": "script" },
+    { "id": "b16",                    "hero": [118, 122],                      "style": "script", "accent": 0 },
+    { "id": "b17", "top": [122, 124], "hero": [124, 127], "bottom": [127, 134],"style": "script" },
+    { "id": "b18", "top": [134, 139], "hero": [139, 141], "bottom": [141, 144],"style": "quote", "color": "gold" },
+    { "id": "b19", "top": [144, 147], "hero": [147, 152],                      "style": "script" },
+    { "id": "b20",                    "hero": [152, 157],                      "style": "script" },
+    { "id": "b21", "top": [157, 162], "hero": [162, 165],                      "style": "stomp", "color": "gold" }
+  ],
+  "steps": {
+    "title": "4 THÔNG TIN THÊM VÀO PROMPT",
+    "items": [
+      { "range": [72, 76], "label": "Nguồn sáng ở đâu" },
+      { "range": [76, 81], "label": "Hướng bóng đi thế nào" },
+      { "range": [81, 87], "label": "Bề mặt phản xạ ra sao" },
+      { "range": [88, 95], "label": "Camera đứng ở vị trí nào" }
+    ]
+  },
+  "shots": [
+    { "t": 0.0,   "s0": 1.15, "s1": 1.21 },
+    { "t": 3.70,  "s0": 1.00, "s1": 1.03 },
+    { "t": 7.10,  "s0": 1.10, "s1": 1.13 },
+    { "t": 9.60,  "s0": 1.18, "s1": 1.21, "x": -0.045 },
+    { "t": 11.74, "s0": 1.14, "s1": 1.18, "x": 0.045 },
+    { "t": 13.60, "s0": 1.01, "s1": 1.04 },
+    { "t": 16.00, "s0": 1.16, "s1": 1.20 },
+    { "t": 18.05, "s0": 1.06, "s1": 1.09 },
+    { "t": 20.35, "s0": 1.22, "s1": 1.26, "y": -0.06 },
+    { "t": 26.40, "s0": 1.01, "s1": 1.04 },
+    { "t": 28.80, "s0": 1.11, "s1": 1.15 },
+    { "t": 32.05, "s0": 1.19, "s1": 1.23 },
+    { "t": 35.65, "s0": 1.03, "s1": 1.06 },
+    { "t": 38.20, "s0": 1.13, "s1": 1.17 },
+    { "t": 41.50, "s0": 1.06, "s1": 1.20 }
+  ],
+  "cta": { "label": "Bình luận", "keyword": "PROMPT", "start": 42.4 }
+}

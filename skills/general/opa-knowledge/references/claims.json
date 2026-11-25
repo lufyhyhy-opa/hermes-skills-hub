@@ -1,0 +1,114 @@
+[
+  {
+    "id": "positioning",
+    "claim": "Đối tác vận hành AI cho đội bán hàng và marketing của doanh nghiệp vừa và nhỏ",
+    "source": "Ke-hoach-ho-so-nang-luc-OPA.md",
+    "locator": "12, 12.1; L329–359",
+    "status": "APPROVED_IN_SOURCE",
+    "qualifier": "Minh chốt 30/10/2026; không suy rộng thành bảo đảm hiệu quả."
+  },
+  {
+    "id": "brand",
+    "claim": "Over Powers Agency",
+    "source": "Bang-kiem-thong-tin.md",
+    "locator": "A5; L32",
+    "status": "APPROVED_IN_SOURCE",
+    "qualifier": "Tên thương hiệu, không đồng nhất với tên pháp lý chưa đối chiếu."
+  },
+  {
+    "id": "legal",
+    "claim": "Thông tin pháp lý và mã số thuế còn chưa đối chiếu được cổng chính thức",
+    "source": "Bang-kiem-thong-tin.md",
+    "locator": "A1; L28,96–111",
+    "status": "UNKNOWN_BLOCKED",
+    "qualifier": "Không tự xác minh hoặc khẳng định pháp lý từ website OPA."
+  },
+  {
+    "id": "operation-year",
+    "claim": "OPA hoạt động từ 2024",
+    "source": "Ke-hoach-ho-so-nang-luc-OPA.md",
+    "locator": "12.2; L403",
+    "status": "APPROVED_IN_SOURCE",
+    "qualifier": "Quyết định 31/10 thay cách ghi theo giấy ở 12.1; không phải ngày đăng ký pháp lý."
+  },
+  {
+    "id": "agent-label",
+    "claim": "OPA Agent: Mở đăng ký dùng thử",
+    "source": "Ke-hoach-ho-so-nang-luc-OPA.md",
+    "locator": "12.2 số 10; L392,405",
+    "status": "CONDITIONAL",
+    "qualifier": "Chỉ đổi Đang bán sau khi Phương xác nhận có shop thật dùng; bản nháp sản phẩm còn nhãn cũ [P]."
+  },
+  {
+    "id": "crm",
+    "claim": "Quản lý khách hàng, bán hàng và công việc ở một chỗ, có trợ lý AI trả lời trên dữ liệu công ty. OPA đang dùng cho chính mình.",
+    "source": "Ke-hoach-ho-so-nang-luc-OPA.md",
+    "locator": "12.1 số 5; L359",
+    "status": "APPROVED_IN_SOURCE",
+    "qualifier": "Câu đã duyệt; tính năng bán hàng/công việc/AI vẫn cần Phương kiểm theo San-pham-va-ky-thuat 2.2 và 6."
+  },
+  {
+    "id": "media",
+    "claim": "Xưởng Media là sản phẩm của OPA",
+    "source": "Bang-kiem-thong-tin.md",
+    "locator": "A6,G8; L33,91",
+    "status": "APPROVED_IN_SOURCE",
+    "qualifier": "Không in số mô hình/người dùng chưa thống nhất; S1 phải xong trước demo."
+  },
+  {
+    "id": "cios",
+    "claim": "Creative Intelligence OS mời riêng, đang mời dùng thử",
+    "source": "San-pham-va-ky-thuat.md",
+    "locator": "2.1,2.2; L46–51,78–82",
+    "status": "DRAFT_CONDITIONAL",
+    "qualifier": "Không tự thêm AI hoặc OPA dùng nội bộ; màn hình I2–I4 chờ Phương."
+  },
+  {
+    "id": "historical-counts",
+    "claim": "146 kỹ năng, 637 sao là số ghi trong tài liệu ngày 30/10/2026",
+    "source": "Ke-hoach-ho-so-nang-luc-OPA.md",
+    "locator": "12.1 số 8; L362",
+    "status": "HISTORICAL_SNAPSHOT",
+    "qualifier": "Đếm lại ngày in, ảnh có ngày; không xem là con số hiện tại hay chứng chỉ đào tạo."
+  },
+  {
+    "id": "legal-review",
+    "claim": "Trang kỹ thuật, sơ đồ dữ liệu còn chờ luật sư đọc",
+    "source": "San-pham-va-ky-thuat.md",
+    "locator": "4,5; L205,265–272,276",
+    "status": "LEGAL_REVIEW_REQUIRED",
+    "qualifier": "Không suy diễn tuân thủ đầy đủ, chứng nhận, dữ liệu không ra nước ngoài; diễn giải luật trong nguồn chưa phải tư vấn pháp lý đã xác nhận."
+  },
+  {
+    "id": "consent",
+    "claim": "Phiếu đội ngũ trong nguồn chưa ai ký",
+    "source": "Doi-ngu.md",
+    "locator": "1; L7–14",
+    "status": "HISTORICAL_GAP",
+    "qualifier": "0/10 tại 31/10, không phải kiểm tra mới; không bịa tên đầy đủ/consent."
+  },
+  {
+    "id": "projects",
+    "claim": "Vi-Tech có web và bản mẫu đặt lịch; chưa phải đặt lịch chạy thật",
+    "source": "Du-an-va-khach.md",
+    "locator": "Thẻ 6; L126–138",
+    "status": "DRAFT_CONDITIONAL",
+    "qualifier": "Duy xác nhận phạm vi và ghi công; kế hoạch 12.2 số 11 giữ thẻ với điều kiện."
+  },
+  {
+    "id": "logos",
+    "claim": "Năm hợp tác logo còn thiếu nguồn",
+    "source": "Du-an-va-khach.md",
+    "locator": "5.4; L210–213",
+    "status": "UNKNOWN_BLOCKED",
+    "qualifier": "26 là danh sách trong nguồn, có thể thành 27 nếu Excook/Micook là hai khách; không biến thành số khách đã xác thực."
+  },
+  {
+    "id": "rules",
+    "claim": "Không ghi giá, không bịa kết quả/lời khen; không lộ dữ liệu khách; nhãn AI và người duyệt",
+    "source": "Ke-hoach-ho-so-nang-luc-OPA.md",
+    "locator": "7,11; L177,321",
+    "status": "APPROVED_POLICY",
+    "qualifier": "Áp dụng cùng Gate1/2/3 hiện hành. Không viết bài/video/asset để thi khi Gate1 chưa duyệt."
+  }
+]

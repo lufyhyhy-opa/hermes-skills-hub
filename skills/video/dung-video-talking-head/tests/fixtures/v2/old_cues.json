@@ -1,0 +1,177 @@
+[
+  {
+    "from": 4,
+    "target": 8.2,
+    "src": "sfx/impact/bass-hit-short.mp3",
+    "volume": 0.179,
+    "note": "hook '20' đập xuống  [hạ 0.82→0.18 tránh lấn giọng]"
+  },
+  {
+    "from": 32,
+    "target": 39.3,
+    "src": "sfx/impact/hit-blow.mp3",
+    "volume": 0.603,
+    "note": "b01 chữ đập: không cần chụp lại  [hạ 0.68→0.60 tránh lấn giọng]"
+  },
+  {
+    "from": 106,
+    "target": 114.0,
+    "src": "sfx/transition/air-woosh-quick.mp3",
+    "volume": 0.28,
+    "note": "cắt cỡ cảnh 1.18→1.00"
+  },
+  {
+    "from": 148,
+    "target": 152.1,
+    "src": "sfx/impact/bass-hit-short.mp3",
+    "volume": 0.232,
+    "note": "b02 chữ đập: tốt có thể mở ra  [hạ 0.68→0.23 tránh lấn giọng]"
+  },
+  {
+    "from": 231,
+    "target": 242.1,
+    "src": "sfx/transition/swoosh-quick.mp3",
+    "volume": 0.38,
+    "note": "b03 hero: ảnh gốc"
+  },
+  {
+    "from": 247,
+    "target": 258.7,
+    "src": "sfx/transition/swoosh-quick.mp3",
+    "volume": 0.42,
+    "note": "bảng liệt kê trượt vào"
+  },
+  {
+    "from": 261,
+    "target": 265.4,
+    "src": "sfx/ui/pop-electric.mp3",
+    "volume": 0.5,
+    "note": "mục 1: Hero cho website"
+  },
+  {
+    "from": 294,
+    "target": 297.8,
+    "src": "sfx/ui/pop-electric.mp3",
+    "volume": 0.45,
+    "note": "mục 2: Lifestyle Facebook"
+  },
+  {
+    "from": 328,
+    "target": 332.0,
+    "src": "sfx/ui/pop-electric.mp3",
+    "volume": 0.4,
+    "note": "mục 3: Cận chất liệu"
+  },
+  {
+    "from": 365,
+    "target": 369.2,
+    "src": "sfx/ui/pop-electric.mp3",
+    "volume": 0.35,
+    "note": "mục 4: Video dọc Reels"
+  },
+  {
+    "from": 394,
+    "target": 398.0,
+    "src": "sfx/ui/pop-electric.mp3",
+    "volume": 0.3,
+    "note": "mục 5: Banner quảng cáo"
+  },
+  {
+    "from": 428,
+    "target": 435.6,
+    "src": "sfx/transition/air-woosh-quick.mp3",
+    "volume": 0.28,
+    "note": "cắt cỡ cảnh 1.20→1.02"
+  },
+  {
+    "from": 476,
+    "target": 491.1,
+    "src": "sfx/transition/sweep-short.mp3",
+    "volume": 0.323,
+    "note": "b04 hero: bí quyết không phải"
+  },
+  {
+    "from": 585,
+    "target": 596.1,
+    "src": "sfx/transition/swoosh-quick.mp3",
+    "volume": 0.305,
+    "note": "b05 hero: đổi màu đổi hình dáng  [hạ 0.38→0.30 tránh lấn giọng]"
+  },
+  {
+    "from": 653,
+    "target": 660.9,
+    "src": "sfx/transition/air-woosh-quick.mp3",
+    "volume": 0.28,
+    "note": "cắt cỡ cảnh 1.18→1.04"
+  },
+  {
+    "from": 678,
+    "target": 685.2,
+    "src": "sfx/impact/hit-blow.mp3",
+    "volume": 0.478,
+    "note": "b06 chữ đập: không nhận ra  [hạ 0.68→0.48 tránh lấn giọng]"
+  },
+  {
+    "from": 759,
+    "target": 762.9,
+    "src": "sfx/impact/bass-hit-short.mp3",
+    "volume": 0.321,
+    "note": "b07 chữ đập: khóa 3 thứ  [hạ 0.68→0.32 tránh lấn giọng]"
+  },
+  {
+    "from": 793,
+    "target": 808.5,
+    "src": "sfx/transition/sweep-short.mp3",
+    "volume": 0.323,
+    "note": "b08 hero: giữ nguyên"
+  },
+  {
+    "from": 886,
+    "target": 897.3,
+    "src": "sfx/transition/swoosh-quick.mp3",
+    "volume": 0.222,
+    "note": "b09 hero: cùng một nhóm khách hàng  [hạ 0.38→0.22 tránh lấn giọng]"
+  },
+  {
+    "from": 913,
+    "target": 921.0,
+    "src": "sfx/transition/air-woosh-quick.mp3",
+    "volume": 0.28,
+    "note": "cắt cỡ cảnh 1.20→1.02"
+  },
+  {
+    "from": 935,
+    "target": 950.1,
+    "src": "sfx/transition/sweep-short.mp3",
+    "volume": 0.323,
+    "note": "b10 hero: tạo các phiên bản khác nhau"
+  },
+  {
+    "from": 1036,
+    "target": 1047.3,
+    "src": "sfx/transition/swoosh-quick.mp3",
+    "volume": 0.38,
+    "note": "b11 hero: tạo nhiều lựa chọn"
+  },
+  {
+    "from": 1099,
+    "target": 1113.9,
+    "src": "sfx/transition/sweep-short.mp3",
+    "volume": 0.323,
+    "note": "b12 hero: lựa chọn nào đáng xuất hiện"
+  },
+  {
+    "from": 1190,
+    "target": 1206.0,
+    "src": "sfx/light/sparkle-touch.mp3",
+    "volume": 0.48,
+    "note": "CTA hiện"
+  },
+  {
+    "from": 1195,
+    "target": 1202.1,
+    "src": "sfx/impact/hit-blow.mp3",
+    "volume": 0.68,
+    "note": "b13 chữ đập: bình luận 5 tài sản"
+  }
+]

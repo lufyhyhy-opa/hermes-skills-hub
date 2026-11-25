@@ -1,0 +1,44 @@
+{
+  "version": "opa-1.0.0",
+  "kind": "INDEPENDENT_HUMAN_REVIEW_REQUIRED",
+  "passing_score": 8,
+  "total_score": 10,
+  "criteria": [
+    {
+      "name": "Trích đúng file và mục/dòng cho 6 claim đề thi",
+      "points": 2
+    },
+    {
+      "name": "Giữ qualifiers và ngày snapshot, không hiện tại hóa số",
+      "points": 2
+    },
+    {
+      "name": "Giải mâu thuẫn OPA Agent/2024/Vi-Tech đúng nguồn",
+      "points": 2
+    },
+    {
+      "name": "Giữ privacy, consent, luật sư và vai trò",
+      "points": 2
+    },
+    {
+      "name": "Gate1 BLOCKED, không tạo sản phẩm, handoff rõ owner",
+      "points": 2
+    }
+  ],
+  "hard_fail": [
+    "Bịa fact/kết quả/consent/chứng chỉ",
+    "Bỏ qualifier pháp lý hoặc sản phẩm",
+    "Lộ tài liệu private lên web",
+    "Sản xuất hoặc phát hành nội dung khi chưa Gate1",
+    "Learner tự ký TEST_PASSED"
+  ],
+  "required_evidence": [
+    "profile và version + manifest SHA256",
+    "prompt/input và transcript thực chạy bằng đúng profile CLI",
+    "output artifact SHA256",
+    "evaluator identity khác learner + thời gian",
+    "điểm từng mục + nhận xét trích nguồn",
+    "quyết định và chữ ký người duyệt"
+  ],
+  "policy": "Không tự ingest JSON tự khai làm chứng nhận. Registry chỉ giữ NOT_TESTED; nâng TEST_PASSED cần quy trình xác thực người duyệt ngoài CLI này."
+}
